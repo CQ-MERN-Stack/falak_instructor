@@ -1,25 +1,32 @@
 import React from 'react';
-import './app.css'
-import LifecycleMethods from "./Components/LifecycleMethods"
+import Form from "./Components/Form"
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: true
-    };
-  }
-  toggle = () => {
-    this.setState({
-      show: !this.state.show
-    });
-  }
-  render() {
-    return (
-      <div className="App">
-        {this.state.show && <LifecycleMethods />}
-        <button onClick={this.toggle}>Click to toggle</button>
-      </div>
-    )
-  }
+// const Menu = (props) => {
+//   console.log("Hello")
+//   return (
+//     <div className={styles.cont}>
+//       <div>{props.left}</div>
+//       <div>{props.right}</div>
+//     </div>
+//   )
+// }
+
+// const Title = ({label}) => <div>{label}</div>
+
+function App() {
+  const username = "";
+  const password = "";
+  const email = "";
+  return (
+    <div>
+      {/* <Menu left={<Title label="LEFT" />} right={<Title label="RIGHT" />} /> */}
+      <Form>
+        <input placeholder="Enter name" name="username" value={username} />
+        <input placeholder="Enter Password" name="password" value={password} />
+        <input placeholder="Enter Email ID" name="email" value={email} />
+      </Form>
+    </div>
+  )
 }
+
+export default App
