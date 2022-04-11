@@ -1,14 +1,7 @@
 import React from "react";
 import axios from "axios";
-
-const config = {
-  method: "get", // post, get, patch, delete, put
-  url: "https://api.github.com/search/users",
-  params: {
-    q: "",
-  },
-};
-
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../redux/actions";
 export default class Github extends React.Component {
   constructor(props) {
     super(props);
@@ -21,32 +14,8 @@ export default class Github extends React.Component {
     };
   }
   getData = (query) => {
-    console.log(query);
-    this.setState({
-      isLoading: true,
-      error: false,
-    });
-    config.params.q = query;
-    console.log(config);
-    axios(config)
-      .then((res) => {
-        // function to be executed after axios call
-        console.log(res.data);
-        this.setState({
-          data: res.data.items,
-          isLoading: false,
-          error: false,
-        });
-      })
-      .catch((err) => {
-        // handle error
-        console.log(err);
-        this.setState({
-          errorMessage: err,
-          error: true,
-          isLoading: false,
-        });
-      });
+    dispatch(getUsers({ query }));
+    this.setState({ data: useSelector((state) => state.userData) });
   };
   render() {
     const { isLoading, data, query, error, errorMessage } = this.state;
